@@ -1,1 +1,115 @@
+//Q)A college generates usernames from student names. Write a Java program that accepts the student&#39;s first
+name, middle name, last name, and year of admission and generates a username consisting of the first
+character of the first name, first character of the middle name, complete last name, and last two digits of the
+admission year.//
 
+CODE:
+import java.util.*;
+public class nameshort{
+    String fname;
+    String mname;
+    String lname;
+    String year;
+
+    public nameshort(String fname,String mname,String lname, String year) {
+        this.fname=fname;
+        this.mname=mname;
+        this.lname=lname;
+        this.year=year;
+    }
+    
+    public String nameshortening(){
+        String shortened;
+        String sfname;
+        String smname;
+        String slname;
+        String syear;
+        sfname=fname.substring(0,1);
+        smname=mname.substring(0,1);
+        slname=lname.toLowerCase();
+        syear=year.substring(2);
+        shortened=sfname+smname+slname+syear;
+        return shortened;
+    }
+    public static void main(String[] args) {
+        Scanner s= new Scanner(System.in);
+        String first_name;
+        String middle_name;
+        String last_name;
+        String yearr;
+        System.out.println("Input first name");
+        first_name=s.nextLine();
+        System.out.println("Input middle name");
+        middle_name=s.nextLine();
+        System.out.println("Input last name");
+        last_name=s.nextLine();
+        System.out.println("batch year");
+        yearr=s.nextLine();
+        nameshort s1=new nameshort(first_name.toLowerCase(), middle_name.toLowerCase(), last_name, yearr);
+        String result = s1.nameshortening();
+        System.out.println("Shortened ID: " + result);
+        
+        s.close();
+
+
+
+    }
+}
+
+//Q)1. Develop a Java program that accepts a sentence and a prohibited word. Replace every occurrence of the
+prohibited word with asterisks of the same length.
+Example: This movie is boring and prohibited word boring → This movie is ******//
+CODE:
+import java.util.Scanner;
+public class censor{
+    public static void main(String[] arg){
+        Scanner s=new Scanner(System.in);
+        System.out.println("Lol input yr string do not use Aarav");
+        String ucen=s.nextLine();
+        if (ucen.contains("Aarav")) {
+            String cen=ucen.replace("Aarav","*****");
+            System.out.println("Bad person:");
+            System.out.println(cen);
+        } 
+        else {
+            System.out.println("Good person:");
+            System.out.println(ucen);
+        }
+    }
+}
+
+//Q)2.2. A bank sends transaction messages in the following format:
+Write a Java program that accepts such a transaction message and extracts the transaction type, amount,
+status, and reference number. The program should then display an appropriate message.//
+
+CODE:
+import java.util.Scanner;
+public class Main{
+    public static void main(String[] args){
+        Scanner s=new Scanner(System.in);
+        System.out.println("Enter transaction message:");
+        String m=s.nextLine();
+        String[] a=m.split("\\|");
+        String t="",amt="",st="",ref="";
+        for(String x:a){
+            x=x.trim();
+            if(x.startsWith("TXN:"))
+                t=x.substring(4).trim();
+            else if(x.startsWith("AMT:"))
+                amt=x.substring(4).trim();
+            else if(x.startsWith("STATUS:"))
+                st=x.substring(7).trim();
+            else if(x.startsWith("REF:"))
+                ref=x.substring(4).trim();
+        }
+        System.out.println("\nTransaction Type : "+t);
+        System.out.println("Amount           : Rs. "+amt);
+        System.out.println("Status           : "+st);
+        System.out.println("Reference No.    : "+ref);
+        if(st.equalsIgnoreCase("SUCCESS"))
+            System.out.println("\nTransaction completed successfully.");
+        else
+            System.out.println("\nTransaction failed or is pending.");
+        s.close();
+    }
+}
